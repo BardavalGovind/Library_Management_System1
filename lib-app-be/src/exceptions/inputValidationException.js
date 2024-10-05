@@ -3,4 +3,4 @@ class InputValidationException extends Error{
         super(message);
     }
 }
-module.exprots = InputValidationException;
+module.exports = InputValidationException;

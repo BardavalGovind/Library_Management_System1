@@ -10,6 +10,7 @@ require("./appMongoose");
 app.use(cors());
 app.use(express.json())
 
+
 app.use("/user", userRoute);
 
 app.listen(8000, ()=>{

@@ -22,4 +22,16 @@ const addNewUser = async (req, res)=>{
     }
 };
 
-module.exports = {addNewUser}
+const loginUser = async (req, res)=>{
+    try{
+        const { email, password } = req.body;
+        const data = await userService.loginUser({ email, password });
+        return res.status(200).send(data);
+    }
+    catch(err){
+        console.error(err);
+        return res.status(500).send({ message: err.message });
+    }
+};
+
+module.exports = {addNewUser, loginUser}

@@ -11,7 +11,7 @@ const encryptPassword = async (plainTextPassword)=>{
 };
 
 const checkPassword = async (plainTextPassword, encryptedPassword)=>{
-    return await bcrypt.compare(plainTextPassword, encryptPassword);
+    return await bcrypt.compare(plainTextPassword, encryptedPassword);
 };
 
 module.exports = { encryptPassword, checkPassword };

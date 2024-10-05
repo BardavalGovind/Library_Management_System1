@@ -15,4 +15,11 @@ const addNewUser = async (user)=>{
     }
 };
 
-module.exports = { addNewUser }
+const loginUser = async ({ email, password }) => {
+    const user = await User.findByEmailAndPasswordForAuth(email, password);
+    console.log(`User with email: ${email} has logged in`)
+    const token = user.generateToken();
+    return { user, token };
+};
+
+module.exports = { addNewUser, loginUser }

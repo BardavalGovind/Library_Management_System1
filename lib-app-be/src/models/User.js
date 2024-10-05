@@ -1,6 +1,7 @@
 const { model, Schema } = require("mongoose");
 const { isEmail } = require("validator")
 const { encryptPassword, checkPassword } = require("../bcrypt");
+const { generateToken } = require("../jwt")
 
 const UserSchema = new Schema({
     firstName: { type: String, trim: true, required: true },
@@ -8,7 +9,7 @@ const UserSchema = new Schema({
     email: {
         type: String,
         lowercase: true,
-        trime: true,
+        trim: true,
         required: true,
         unique: true,
         validate: {
@@ -54,11 +55,11 @@ UserSchema.pre("save", async function (next) {
     next();
 });
 
-UserSchema.statics.findByEmailAndPasswordForAuth = async (email, password)=>{
+UserSchema.statics.findByEmailAndPasswordForAuth = async function(email, password){
     try{
-        const user = await User.findOne({ email });
+        const user = await this.findOne({ email });
         if(!user){
-            throw new Error(`Login Failed.`)
+            throw new Error(`Login Failed.`);
         }
         const encryptedPassword = user.password;
         const isMatch = await checkPassword(password, encryptedPassword);
@@ -74,11 +75,11 @@ UserSchema.statics.findByEmailAndPasswordForAuth = async (email, password)=>{
     }
 };
 
-UserSchema.methods.generateToken = function (){
+UserSchema.methods.generateToken = async function (){
     const user = this;
     const token = generateToken(user);
     user.tokens.push({ token });
-    user.save();
+   await user.save();
     return token;
 };
 
