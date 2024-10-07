@@ -1,7 +1,7 @@
 //appMongoose.js
 const { connect } = require("mongoose")
 
-const MONGO_DB_URL = "mongodb://localhost:27017";
+const MONGO_DB_URL = "mongodb+srv://bardavalgovind:GnS2005@cluster1.ouyfx.mongodb.net";
 const DB_NAME = "cs-library-app";
 
 const connectDb = async ()=>{

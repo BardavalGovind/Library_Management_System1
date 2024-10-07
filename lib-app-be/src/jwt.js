@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-const CS_LIB_APP_SIGN = "CS_LIB_APP_SIGN";
+const CS_LIB_APP_SIGN = "CS_LIB_AppSign";
 
 const generateToken = ({ _id, type }) => {
     const token = jwt.sign({ _id, type }, CS_LIB_APP_SIGN);
