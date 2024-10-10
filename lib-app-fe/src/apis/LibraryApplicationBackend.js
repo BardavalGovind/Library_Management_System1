@@ -12,8 +12,8 @@ LibraryApplicationBackend.interceptors.request.use(
     (config) => {
         const token = getUserToken();
         if (token) {
-            config.headers.Authorization = `Bearer ${token}`; // Properly append Authorization header
-            console.log("Authorization header set");
+            config.headers.Authorization = `Bearer ${token}` ; // Properly append Authorization header
+            console.log("inside interceptor");
         }
         return config;
     },

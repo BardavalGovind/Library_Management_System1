@@ -12,16 +12,21 @@ const LoginScreen = ()=>{
         e.preventDefault();
         console.log(credentials);
         if(validateCredentials()){
-            const user = await loginUser(credentials);
-            if(user.type === "LIBRARIAN"){
-                navigate("/librarian");
+            try{
+                const user = await loginUser(credentials);
+                console.log("user logged in: ", user);
+                if(user){
+                    console.log("before navigated")
+                    navigate("/");
+                }
             }
-            else{
-                navigate("/student");
+            catch(error){
+                console.error("Error logged in: ", error)
             }
+            
         }
 
-    }
+    };
     const validateCredentials = ()=>{
         return credentials.email?.length && credentials.password?.length;
     }

@@ -22,4 +22,6 @@ const loginUser = async ({ email, password }) => {
     return { user, token };
 };
 
+
+
 module.exports = { addNewUser, loginUser }

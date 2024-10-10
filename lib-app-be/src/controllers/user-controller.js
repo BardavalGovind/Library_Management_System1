@@ -27,6 +27,7 @@ const loginUser = async (req, res)=>{
         const { email, password } = req.body;
         const data = await userService.loginUser({ email, password });
         return res.status(200).send(data);
+       // return res.status(200);
     }
     catch(err){
         console.error(err);
@@ -34,4 +35,18 @@ const loginUser = async (req, res)=>{
     }
 };
 
-module.exports = {addNewUser, loginUser}
+const logoutUser = async (req, res)=>{
+    try{
+        const { token } = req;
+        let user = await User.findOne({ _id: req.user._id });
+        user.tokens = user.tokens.filter((userToken) => userToken !== token);
+        await user.save();
+        return res.status(200);
+    }
+    catch(err){
+        console.error(err);
+        return res.status(500).send({ message: err.message })
+    }
+}
+
+module.exports = {addNewUser, loginUser, logoutUser}

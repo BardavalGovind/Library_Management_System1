@@ -22,10 +22,10 @@ const SignUpScreen = ()=>{
                 console.log("User data:", user);
                 if (user.type === "LIBRARIAN") {
                     console.log("he is a librarian")
-                    navigate("/librarian");
+                    navigate("/");
                 } else {
                     console.log("he is a student")
-                    navigate("/student");
+                    navigate("/");
                 }
             } catch (error) {
                 console.error("Signup failed:", error);
